@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-SonarScan</actionName>
+        <displayName>SonarScan</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>verify</goal>
+            <goal>sonar:sonar</goal>
+        </goals>
+        <properties>
+            <sonar.projectKey>k-vfs-mechanism</sonar.projectKey>
+            <sonar.host.url>http://honey.project-k.mydns.jp:9000</sonar.host.url>
+            <sonar.login>sqp_aaa8a4b3c0210ca74681c141d96e23c057b1d58c</sonar.login>
+        </properties>
+    </action>
+</actions>
