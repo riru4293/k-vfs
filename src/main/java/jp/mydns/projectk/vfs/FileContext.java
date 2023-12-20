@@ -97,7 +97,7 @@ public class FileContext {
      *        ,"ftp:usePassiveMode": true
      *        ,"ftp:connectTimeout": "PT5S"
      *        ,"ftp:dataTimeout"   : "PT1M"
-     *        ,"ftp:soTimeout"     : "PT5S"
+     *        ,"ftp:socketTimeout" : "PT5S"
      *     }
      * }
      * </code></pre>
