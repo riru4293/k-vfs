@@ -28,15 +28,13 @@ package jp.mydns.projectk.vfs;
 import jakarta.json.JsonNumber;
 import jakarta.json.JsonString;
 import jakarta.json.JsonValue;
-import static jakarta.json.JsonValue.ValueType.FALSE;
-import static jakarta.json.JsonValue.ValueType.TRUE;
 import java.time.Duration;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Source value validator for {@link FileOption}.
+ * Validation utilities for {@link FileOption} source value.
  * <p>
  * Implementation requirements.
  * <ul>
