@@ -94,10 +94,10 @@ public class FileContext {
      *     "filename": "ftp://hostname:21/path/to/any/file.example"
      *    ,"options": {
      *         "account": {"id": "ftp-user", "password": "ftp-pass"}
-     *        ,"ftp:usePassiveMode": true
-     *        ,"ftp:connectTimeout": "PT5S"
-     *        ,"ftp:dataTimeout"   : "PT1M"
-     *        ,"ftp:socketTimeout" : "PT5S"
+     *        ,"ftp:usePassiveMode"   : true
+     *        ,"ftp:connectionTimeout": "PT5S"
+     *        ,"ftp:dataTimeout"      : "PT1M"
+     *        ,"ftp:socketTimeout"    : "PT5S"
      *     }
      * }
      * </code></pre>
