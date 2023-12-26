@@ -442,6 +442,21 @@ class FileOptionSourceValidatorTest {
     }
 
     /**
+     * Test of requireDuration method. If negative.
+     *
+     * @since 1.0.0
+     */
+    @Test
+    void testRequireDuration_Negative() {
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireDuration(Json.createValue("-PT1S"), "negative"))
+                .withMessage("FileOption value of [negative] must be duration.")
+                .withStackTraceContaining("Must not be negative.");
+
+    }
+
+    /**
      * Test of requireStringList method. If valid.
      *
      * @since 1.0.0

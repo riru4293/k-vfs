@@ -170,7 +170,7 @@ public class FileOptionSourceValidator {
      * @param optionName name of {@code FileOption}. Used in message if occurs {@code IllegalArgumentException}
      * @return {@code durationValue} as {@code Duration}
      * @throws NullPointerException if any argument is {@code null}
-     * @throws IllegalArgumentException if {@code durationValue} is not convertible to {@code Duration}
+     * @throws IllegalArgumentException if {@code durationValue} is not convertible to positive {@code Duration}
      * @since 1.0.0
      */
     public static Duration requireDuration(JsonValue durationValue, String optionName) {
@@ -178,15 +178,25 @@ public class FileOptionSourceValidator {
         Objects.requireNonNull(durationValue);
         Objects.requireNonNull(optionName);
 
+        final Duration value;
+
         try {
 
-            return Duration.parse(JsonString.class.cast(durationValue).getString());
+            value = Duration.parse(JsonString.class.cast(durationValue).getString());
 
-        } catch (ClassCastException | DateTimeParseException ex) {
+            if (value.isNegative()) {
+
+                throw new IllegalArgumentException("Must not be negative.");
+
+            }
+
+        } catch (ClassCastException | DateTimeParseException | IllegalArgumentException ex) {
 
             throw new IllegalArgumentException(MSG_TEMPLATE.formatted(optionName, "duration"), ex);
 
         }
+
+        return value;
 
     }
 
