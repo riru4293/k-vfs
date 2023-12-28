@@ -28,6 +28,7 @@ package jp.mydns.projectk.vfs;
 import jakarta.json.Json;
 import jakarta.json.JsonValue;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -698,6 +699,83 @@ class FileOptionSourceValidatorTest {
 
         assertThatNullPointerException()
                 .isThrownBy(() -> FileOptionSourceValidator.requireIntList(JsonValue.NULL, null));
+
+    }
+
+    /**
+     * Test of requireCharset method. If valid.
+     *
+     * @since 1.0.0
+     */
+    @Test
+    void testRequireCharset() {
+
+        assertThat(FileOptionSourceValidator.requireCharset(Json.createValue("UTF-8"), "utf8"))
+                .isEqualTo(StandardCharsets.UTF_8);
+
+    }
+
+    /**
+     * Test of requireCharset method. If invalid type.
+     *
+     * @since 1.0.0
+     */
+    @Test
+    void testRequireCharset_InvalidType() {
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(JsonValue.NULL, "X"))
+                .withMessage("FileOption value of [X] must be charset name.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(JsonValue.TRUE, "X"))
+                .withMessage("FileOption value of [X] must be charset name.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(JsonValue.FALSE, "X"))
+                .withMessage("FileOption value of [X] must be charset name.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(Json.createValue(0), "X"))
+                .withMessage("FileOption value of [X] must be charset name.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(JsonValue.EMPTY_JSON_ARRAY, "X"))
+                .withMessage("FileOption value of [X] must be charset name.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(JsonValue.EMPTY_JSON_OBJECT, "X"))
+                .withMessage("FileOption value of [X] must be charset name.");
+
+    }
+
+    /**
+     * Test of requireCharset method. If illegal value.
+     *
+     * @since 1.0.0
+     */
+    @Test
+    void testRequireCharset_IllegalValue() {
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(Json.createValue("ILL"), "X"))
+                .withMessage("FileOption value of [X] must be charset name.");
+
+    }
+
+    /**
+     * Test of requireCharset method. If null.
+     *
+     * @since 1.0.0
+     */
+    @Test
+    void testRequireCharset_Null() {
+
+        assertThatNullPointerException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(null, "X"));
+
+        assertThatNullPointerException()
+                .isThrownBy(() -> FileOptionSourceValidator.requireCharset(JsonValue.NULL, null));
 
     }
 

@@ -28,6 +28,7 @@ package jp.mydns.projectk.vfs;
 import jakarta.json.JsonNumber;
 import jakarta.json.JsonString;
 import jakarta.json.JsonValue;
+import java.nio.charset.Charset;
 import java.time.Duration;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -249,6 +250,33 @@ public class FileOptionSourceValidator {
         } catch (ClassCastException | IllegalArgumentException | NullPointerException | ArithmeticException ex) {
 
             throw new IllegalArgumentException(MSG_TEMPLATE.formatted(optionName, "list of int"), ex);
+
+        }
+
+    }
+
+    /**
+     * Validate if source value for {@link FileOption} can be converted to {@code Duration}.
+     *
+     * @param charsetValue charset name as JSON
+     * @param optionName name of {@code FileOption}. Used in message if occurs {@code IllegalArgumentException}
+     * @return {@code charsetValue} as {@code Charset}
+     * @throws NullPointerException if any argument is {@code null}
+     * @throws IllegalArgumentException if {@code charsetValue} is not convertible to {@code Charset}
+     * @since 1.0.0
+     */
+    public static Charset requireCharset(JsonValue charsetValue, String optionName) {
+
+        Objects.requireNonNull(charsetValue);
+        Objects.requireNonNull(optionName);
+
+        try {
+
+            return Charset.forName(JsonString.class.cast(charsetValue).getString());
+
+        } catch (ClassCastException | IllegalArgumentException ex) {
+
+            throw new IllegalArgumentException(MSG_TEMPLATE.formatted(optionName, "charset name"), ex);
 
         }
 
