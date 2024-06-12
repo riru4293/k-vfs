@@ -214,5 +214,14 @@ public class AccountContext extends AbstractFileOption {
      * @since 1.0.0
      */
     public static class Resolver implements FileOption.Resolver {
+
+        /**
+         * Constructs a new instance.
+         *
+         * @since 1.0.0
+         */
+        public Resolver() {
+            // Do nothing.
+        }
     }
 }

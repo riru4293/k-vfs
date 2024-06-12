@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, Project-K
+ * Copyright (c) 2024, Project-K
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,49 +23,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.mydns.projectk.vfs;
-
-import java.util.Optional;
-import org.apache.commons.vfs2.FileSystemOptions;
 
 /**
- * Abstract implementation of the {@code FileOption}.
- * <p>
- * Implementation requirements.
- * <ul>
- * <li>This class is immutable and thread-safe.</li>
- * <li>This class and JSON can be converted bidirectionally.</li>
- * <li>Can reflect this class on the {@link FileSystemOptions}.</li>
- * </ul>
+ * Project-K VFS implements.
  *
- * @author riru
- * @version 1.0.0
+ * @provides jp.mydns.projectk.vfs.FileOption.Resolver
+ * @uses jp.mydns.projectk.vfs.FileOption.Resolver
+ *
  * @since 1.0.0
  */
-public abstract class AbstractFileOption implements FileOption {
-
-    /**
-     * Sole constructor. (For invocation by subclass constructors, typically implicit.)
-     *
-     * @since 1.0.0
-     */
-    protected AbstractFileOption() {
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>
-     * The default implementation returns the value of the {@link FileOption.Name} annotation attached to this class.
-     *
-     * @throws IllegalStateException if the definition name cannot be resolved
-     * @since 1.0.0
-     */
-    @Override
-    public String getName() {
-
-        FileOption.Name name = this.getClass().getAnnotation(FileOption.Name.class);
-
-        return Optional.ofNullable(name).map(FileOption.Name::value).orElseThrow(
-                () -> new IllegalStateException("No found a file option name."));
-    }
+module jp.mydns.projectk.vfs {
+    requires commons.vfs2;
+    requires commons.logging;
+    requires org.apache.commons.lang3;
+    requires jakarta.json;
+    uses jp.mydns.projectk.vfs.FileOption.Resolver;
+    provides jp.mydns.projectk.vfs.FileOption.Resolver with jp.mydns.projectk.vfs.AccountContext.Resolver;
 }

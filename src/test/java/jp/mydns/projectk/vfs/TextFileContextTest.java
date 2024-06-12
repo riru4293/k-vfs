@@ -41,7 +41,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import test.FileSystemManagerParameterResolver;
 
 /**
  * Test of class TextFileContext.
@@ -56,12 +55,12 @@ class TextFileContextTest {
     private static Path tmpFile;
 
     @BeforeEach
-    private void createTmpFile() throws IOException {
+    void createTmpFile() throws IOException {
         tmpFile = Files.createTempFile(Path.of(System.getProperty("java.io.tmpdir")), null, null);
     }
 
     @AfterEach
-    private void removeTmpFile() throws IOException {
+    void removeTmpFile() throws IOException {
         Files.deleteIfExists(tmpFile);
     }
 
