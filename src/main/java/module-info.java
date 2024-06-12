@@ -39,4 +39,5 @@ module jp.mydns.projectk.vfs {
     requires jakarta.json;
     uses jp.mydns.projectk.vfs.FileOption.Resolver;
     provides jp.mydns.projectk.vfs.FileOption.Resolver with jp.mydns.projectk.vfs.AccountContext.Resolver;
+    exports jp.mydns.projectk.vfs;
 }
